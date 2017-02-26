@@ -1,7 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
 const BasicCollection = require('./src/Collection');
-const config = require('ctk-config');
-const url = config.mongo.url;
 
 let connection = null;
 
@@ -9,7 +7,7 @@ function db(collection) {
 	return connection.collection(collection);
 }
 
-db.open = function () {
+db.open = function (url) {
 	return new Promise((resolve, reject) => {
 		MongoClient.connect(url, function (err, handler) {
 			if (err)
