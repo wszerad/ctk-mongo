@@ -4,6 +4,8 @@ const BasicCollection = require('./src/Collection');
 let connection = null;
 
 function db(collection) {
+	if(!connection) throw new Error('Setup database connection first!');
+
 	return connection.collection(collection);
 }
 
@@ -20,11 +22,15 @@ db.open = function (url) {
 };
 
 db.close = function () {
+	if(!connection) throw new Error('Setup database connection first!');
+
 	connection.close();
 	return db;
 };
 
 db.connection = function () {
+	if(!connection) throw new Error('Setup database connection first!');
+
 	return connection;
 };
 
